@@ -20,7 +20,18 @@ function addSectionComments() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', addSectionComments);
+function setChecklistSelectDefaults() {
+  document.querySelectorAll('select[data-key]').forEach((select) => {
+    if ([...select.options].some((option) => option.value === 'N/A')) {
+      select.value = 'N/A';
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  addSectionComments();
+  setChecklistSelectDefaults();
+});
 
 function gatherChecklistItems() {
   return Array.from(form.querySelectorAll('select[data-key]')).map((select) => {
@@ -195,4 +206,5 @@ resetButton.addEventListener('click', () => {
   form.reset();
   reportOutput.value = '';
   showEmailFeedback('', false);
+  setChecklistSelectDefaults();
 });
