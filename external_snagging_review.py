@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Fetch snagging checklist sources and extract common checklist topics.
 
+Author: asifontheline
+
 This script is intended for periodic review of external snagging references so
 that the website checklist can stay aligned with global inspection practices.
 """

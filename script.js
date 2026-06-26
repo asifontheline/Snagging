@@ -1,3 +1,4 @@
+/* Author: asifontheline */
 const form = document.getElementById('snag-form');
 const reportOutput = document.getElementById('reportOutput');
 const generateButton = document.getElementById('generate');
@@ -19,6 +20,7 @@ function addSectionComments() {
     section.appendChild(wrapper);
   });
 }
+
 
 function setChecklistSelectDefaults() {
   document.querySelectorAll('select[data-key]').forEach((select) => {
