@@ -158,7 +158,41 @@ copyButton.addEventListener('click', async () => {
   }
 });
 
+function validateEmail(email) {
+  const trimmed = email.trim();
+  if (!trimmed) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+}
+
+function showEmailFeedback(message, isError = true) {
+  const feedback = document.getElementById('emailFeedback');
+  feedback.textContent = message;
+  feedback.style.color = isError ? '#dc2626' : '#16a34a';
+}
+
+const sendButton = document.getElementById('sendReport');
+
+sendButton.addEventListener('click', () => {
+  const emailInput = document.getElementById('email');
+  const email = emailInput.value.trim();
+  if (!validateEmail(email)) {
+    showEmailFeedback('Please enter a valid email address before sending.');
+    emailInput.focus();
+    return;
+  }
+
+  if (!reportOutput.value) {
+    reportOutput.value = buildReport();
+  }
+
+  const subject = encodeURIComponent('Pre-Handover Snagging Report');
+  const body = encodeURIComponent(reportOutput.value);
+  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  showEmailFeedback('Email client opened with your report. Complete send from your email app.', false);
+});
+
 resetButton.addEventListener('click', () => {
   form.reset();
   reportOutput.value = '';
+  showEmailFeedback('', false);
 });

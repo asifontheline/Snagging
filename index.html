@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pre-Handover Snagging Test</title>
+    <title>Handover Snagging Report</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header>
-        <h1>Apartment Pre-Handover Snagging Report</h1>
+        <h1>Handover Snagging Report</h1>
         <p>Inspect, record, and generate a detailed snagging report before handover.</p>
       </header>
 
@@ -27,7 +27,7 @@
         <fieldset>
           <legend>Project & Handover Details</legend>
           <label>
-            Apartment Address
+            House / Apartment Address
             <input type="text" id="address" placeholder="123 Main St, Apt 12B" required />
           </label>
           <label>
@@ -700,11 +700,17 @@
             Follow-up and punch list status
             <textarea id="handoverChecklist" rows="3" placeholder="Capture builder rectification status, closed issues, or next review items."></textarea>
           </label>
+          <label>
+            Recipient email address
+            <input type="email" id="email" placeholder="tenant@example.com" />
+          </label>
+          <p id="emailFeedback" class="email-feedback"></p>
         </fieldset>
 
         <div class="actions">
           <button type="button" id="generate">Generate Report</button>
           <button type="button" id="copyReport">Copy Report</button>
+          <button type="button" id="sendReport">Send Report</button>
           <button type="button" id="resetForm">Reset</button>
         </div>
       </form>
@@ -713,6 +719,9 @@
         <h2>Generated Snagging Report</h2>
         <textarea id="reportOutput" readonly rows="18" placeholder="Your generated report will appear here."></textarea>
       </section>
+      <div class="credits-banner">
+        <p>GitHub repo: github.com/your-username/Snagging • Developer: Your Name • Powered by GitHub Copilot in VS Code</p>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
