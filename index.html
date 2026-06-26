@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pre-Handover Snagging Test</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>Apartment Pre-Handover Snagging Report</h1>
+        <p>Inspect, record, and generate a detailed snagging report before handover.</p>
+      </header>
+
+      <section class="instructions">
+        <h2>Instructions</h2>
+        <ol>
+          <li>Complete the apartment details and inspection metadata.</li>
+          <li>Use each checklist section to record the condition of fixtures, finishes, and systems.</li>
+          <li>Add any extra observations or required repairs in the notes fields.</li>
+          <li>Click <strong>Generate Report</strong> to create a structured handover snagging report.</li>
+        </ol>
+      </section>
+
+      <form id="snag-form">
+        <fieldset>
+          <legend>Project & Handover Details</legend>
+          <label>
+            Apartment Address
+            <input type="text" id="address" placeholder="123 Main St, Apt 12B" required />
+          </label>
+          <label>
+            Block / Unit
+            <input type="text" id="unit" placeholder="Block A / Unit 12B" />
+          </label>
+          <label>
+            Building / Project
+            <input type="text" id="project" placeholder="Builder name or project" />
+          </label>
+          <label>
+            Inspection Type
+            <select id="inspectionType">
+              <option value="Pre-Handover">Pre-Handover</option>
+              <option value="Post-Handover">Post-Handover</option>
+              <option value="Dampness / Quality Audit">Dampness / Quality Audit</option>
+            </select>
+          </label>
+          <label>
+            Unit Floor Area
+            <input type="text" id="area" placeholder="e.g. 1250 sq.ft / 116 sqm" />
+          </label>
+          <label>
+            Handover Date
+            <input type="date" id="handoverDate" />
+          </label>
+          <label>
+            Inspector Name
+            <input type="text" id="inspector" placeholder="Inspector / Tenant" />
+          </label>
+          <label>
+            Customer Name
+            <input type="text" id="customer" placeholder="Buyer / Client" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Comprehensive Handover Checklist</legend>
+          <div class="checklist-grid">
+            <div class="checklist-section">
+              <h3>Entrance & Lobby</h3>
+              <label>
+                Entrance door operation
+                <select data-key="Entrance door operation">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Door finish, paint and trim
+                <select data-key="Door finish, paint and trim">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Flooring and thresholds
+                <select data-key="Flooring and thresholds">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Common Area & External Shared Spaces</h3>
+              <label>
+                Corridor and foyer finishes
+                <select data-key="Corridor and foyer finishes" data-group="Common Area & External Shared Spaces">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                External lighting and signage
+                <select data-key="External lighting and signage" data-group="Common Area & External Shared Spaces">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Staircase / passage cleanliness and finish
+                <select data-key="Staircase / passage cleanliness and finish" data-group="Common Area & External Shared Spaces">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Living Room</h3>
+              <label>
+                Living room wall and ceiling finishes
+                <select data-key="Living room wall and ceiling finishes" data-group="Living Room">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Living room flooring and skirting
+                <select data-key="Living room flooring and skirting" data-group="Living Room">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Living room switchgear and lighting
+                <select data-key="Living room switchgear and lighting" data-group="Living Room">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Master Bedroom</h3>
+              <label>
+                Master bedroom wall and ceiling finishes
+                <select data-key="Master bedroom wall and ceiling finishes" data-group="Master Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Master bedroom doors and fittings
+                <select data-key="Master bedroom doors and fittings" data-group="Master Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Master bedroom wardrobe / storage
+                <select data-key="Master bedroom wardrobe / storage" data-group="Master Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Child Bedroom</h3>
+              <label>
+                Child bedroom paint and finish
+                <select data-key="Child bedroom paint and finish" data-group="Child Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Child bedroom windows and safety
+                <select data-key="Child bedroom windows and safety" data-group="Child Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Child bedroom electrical and fan fixtures
+                <select data-key="Child bedroom electrical and fan fixtures" data-group="Child Bedroom">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Kitchen</h3>
+              <label>
+                Cupboards and hardware
+                <select data-key="Cupboards and hardware" data-group="Kitchen">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Worktop and splashback
+                <select data-key="Worktop and splashback" data-group="Kitchen">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Kitchen sink and drainage
+                <select data-key="Kitchen sink and drainage" data-group="Kitchen">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Gas connection and plumbing safety
+                <select data-key="Gas connection and plumbing safety" data-group="Kitchen">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Fixed appliance installation and function test
+                <select data-key="Fixed appliance installation and function test" data-group="Kitchen">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Bathrooms</h3>
+              <label>
+                Sanitaryware condition
+                <select data-key="Sanitaryware condition">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Tiling, grout and seals
+                <select data-key="Tiling, grout and seals">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Hot water and ventilation
+                <select data-key="Hot water and ventilation">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Toilet flush and trap operation
+                <select data-key="Toilet flush and trap operation">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Shower/wet area seals and screens
+                <select data-key="Shower/wet area seals and screens">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Bedrooms</h3>
+              <label>
+                Doors, handles, and locks
+                <select data-key="Doors, handles, and locks">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Lighting and fan fixtures
+                <select data-key="Lighting and fan fixtures">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Wardrobes / built-in storage
+                <select data-key="Wardrobes / built-in storage">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Utilities & Systems</h3>
+              <label>
+                HVAC / air-conditioning
+                <select data-key="HVAC / air-conditioning" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Electrical panel / meter
+                <select data-key="Electrical panel / meter" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                RCD / circuit breaker function and labelling
+                <select data-key="RCD / circuit breaker function and labelling" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Earthing and bonding continuity
+                <select data-key="Earthing and bonding continuity" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Gas meter / regulator and shut-off valve condition
+                <select data-key="Gas meter / regulator and shut-off valve condition" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Power points, switches and lighting circuits
+                <select data-key="Power points, switches and lighting circuits" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Telecom / data / TV outlets
+                <select data-key="Telecom / data / TV outlets" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Water supply and pressure
+                <select data-key="Water supply and pressure" data-group="Utilities & Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Parking & EV Charging</h3>
+              <label>
+                Assigned parking bay condition
+                <select data-key="Assigned parking bay condition" data-group="Parking & EV Charging">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Parking access, lighting and security
+                <select data-key="Parking access, lighting and security" data-group="Parking & EV Charging">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                EV charger provision and wiring
+                <select data-key="EV charger provision and wiring" data-group="Parking & EV Charging">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Flooring & Tiles</h3>
+              <label>
+                Tile alignment and edge finishing
+                <select data-key="Tile alignment and edge finishing" data-group="Flooring & Tiles">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Grout quality and joints
+                <select data-key="Grout quality and joints" data-group="Flooring & Tiles">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Hollow or uneven tiles
+                <select data-key="Hollow or uneven tiles" data-group="Flooring & Tiles">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Doors & Windows</h3>
+              <label>
+                Door/window alignment and operation
+                <select data-key="Door/window alignment and operation" data-group="Doors & Windows">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Locking systems and hardware
+                <select data-key="Locking systems and hardware" data-group="Doors & Windows">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Seal, glazing and leakage
+                <select data-key="Seal, glazing and leakage" data-group="Doors & Windows">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Weather seals, draughts and restrictors
+                <select data-key="Weather seals, draughts and restrictors" data-group="Doors & Windows">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Balcony & External Areas</h3>
+              <label>
+                Railing stability and finish
+                <select data-key="Railing stability and finish" data-group="Balcony & External Areas">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Balcony drainage and slope
+                <select data-key="Balcony drainage and slope" data-group="Balcony & External Areas">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                External plaster and paint quality
+                <select data-key="External plaster and paint quality" data-group="Balcony & External Areas">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Inner balcony wash area plumbing and drains
+                <select data-key="Inner balcony wash area plumbing and drains" data-group="Balcony & External Areas">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                External drainage, gutters and downpipes
+                <select data-key="External drainage, gutters and downpipes" data-group="Balcony & External Areas">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Appliances & Fixtures</h3>
+              <label>
+                Kitchen appliance installation
+                <select data-key="Kitchen appliance installation" data-group="Appliances & Fixtures">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Exhaust / chimney and ventilation
+                <select data-key="Exhaust / chimney and ventilation" data-group="Appliances & Fixtures">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Geyser / hot water system
+                <select data-key="Geyser / hot water system" data-group="Appliances & Fixtures">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Fire detection, alarms and emergency lighting
+                <select data-key="Fire detection, alarms and emergency lighting" data-group="Appliances & Fixtures">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+            <div class="checklist-section">
+              <h3>Safety & Emergency Systems</h3>
+              <label>
+                Smoke / heat alarms and detectors
+                <select data-key="Smoke / heat alarms and detectors" data-group="Safety & Emergency Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Emergency lighting and exit signage
+                <select data-key="Emergency lighting and exit signage" data-group="Safety & Emergency Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Fire door seals and closers
+                <select data-key="Fire door seals and closers" data-group="Safety & Emergency Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Carbon monoxide / gas leak detection
+                <select data-key="Carbon monoxide / gas leak detection" data-group="Safety & Emergency Systems">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Waterproofing & Dampness</h3>
+              <label>
+                Bathroom waterproofing and slope
+                <select data-key="Bathroom waterproofing and slope" data-group="Waterproofing & Dampness">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Wet area leak / dampness checks
+                <select data-key="Wet area leak / dampness checks" data-group="Waterproofing & Dampness">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+              <label>
+                Balcony and external wall dampness
+                <select data-key="Balcony and external wall dampness" data-group="Waterproofing & Dampness">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="checklist-section">
+              <h3>Compliance & Handover Documents</h3>
+              <div class="item-row">
+                <label>Builder handover documents and warranties</label>
+                <select data-key="Builder handover documents and warranties" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="Builder handover documents and warranties" placeholder="Note missing papers or warranty gaps" />
+              </div>
+              <div class="item-row">
+                <label>Appliance manuals and maintenance instructions</label>
+                <select data-key="Appliance manuals and maintenance instructions" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="Appliance manuals and maintenance instructions" placeholder="Record missing or incomplete guides" />
+              </div>
+              <div class="item-row">
+                <label>DLP / defect liability coverage and issue list</label>
+                <select data-key="DLP / defect liability coverage and issue list" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="DLP / defect liability coverage and issue list" placeholder="Describe coverage or missing items" />
+              </div>
+              <div class="item-row">
+                <label>Final snag closure list and remedial status</label>
+                <select data-key="Final snag closure list and remedial status" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="Final snag closure list and remedial status" placeholder="Add handover closure details" />
+              </div>
+              <div class="item-row">
+                <label>Occupancy / completion certificates and approvals</label>
+                <select data-key="Occupancy / completion certificates and approvals" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="Occupancy / completion certificates and approvals" placeholder="Record certificate status or missing approvals" />
+              </div>
+              <div class="item-row">
+                <label>Electrical, water and gas safety certificates</label>
+                <select data-key="Electrical, water and gas safety certificates" data-group="Compliance & Handover Documents">
+                  <option value="Pass">Pass</option>
+                  <option value="Fail">Fail</option>
+                  <option value="N/A">N/A</option>
+                </select>
+                <input type="text" data-comment-for="Electrical, water and gas safety certificates" placeholder="Record missing or incomplete safety paperwork" />
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Additional Observations</legend>
+          <label>
+            Custom instructions or focal areas
+            <textarea id="customInstructions" rows="3" placeholder="E.g. check balcony glass, test all appliances, verify paint finish."></textarea>
+          </label>
+          <label>
+            Overall notes and snag summary
+            <textarea id="notes" rows="4" placeholder="Record defects, follow-ups, and exact repair requirements."></textarea>
+          </label>
+          <label>
+            Follow-up and punch list status
+            <textarea id="handoverChecklist" rows="3" placeholder="Capture builder rectification status, closed issues, or next review items."></textarea>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" id="generate">Generate Report</button>
+          <button type="button" id="copyReport">Copy Report</button>
+          <button type="button" id="resetForm">Reset</button>
+        </div>
+      </form>
+
+      <section class="report-panel">
+        <h2>Generated Snagging Report</h2>
+        <textarea id="reportOutput" readonly rows="18" placeholder="Your generated report will appear here."></textarea>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
